@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "jsx": "react-jsx",
+    "target": "ESNext",
+    "module": "ESNext",
+    "noEmit": true,
+    "checkJs": false,
+    "skipLibCheck": true
+  },
+  "typeAcquisition": {
+    "enable": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", ".vite"]
+}
