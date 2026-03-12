@@ -20,7 +20,12 @@ export const useInterviewStore = create((set) => ({
     company: info.company 
   }),
 
-  setQuestions: (questions) => set({ questions, isInterviewStarted: true }),
+ // Ensure this action is in your store/useInterviewStore.js
+setQuestions: (questions) => set({ 
+  questions, 
+  isInterviewStarted: true,
+  currentQuestionIndex: 0 
+}),
 
   nextQuestion: () => set((state) => ({ 
     currentQuestionIndex: Math.min(state.currentQuestionIndex + 1, state.questions.length - 1) 

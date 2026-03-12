@@ -1,18 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import JDInputForm from './features/research/JDInputForm'
+import JDInputForm from './features/research/JDInputForm';
+import InterviewStage from './features/interview/InterviewStage';
+import { useInterviewStore } from './store/useInterviewStore';
 
 function App() {
+  const isInterviewStarted = useInterviewStore((state) => state.isInterviewStarted);
+
   return (
-    // The "dark" class ensures those oklch variables you sent work correctly!
-    <div className="dark">
-      <main className="min-h-screen bg-background text-foreground flex items-center justify-center p-4">
-        <JDInputForm />
-      </main>
+    <div className="dark min-h-screen bg-background text-foreground p-4">
+      {!isInterviewStarted ? <JDInputForm /> : <InterviewStage />}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

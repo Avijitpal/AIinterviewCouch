@@ -5,17 +5,25 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
+import { startInterview } from '@/services/api';
+
 
 export default function JDInputForm() {
   const setJobInfo = useInterviewStore((state) => state.setJobInfo);
   const [form, setForm] = useState({ role: '', company: '', jd: '' });
+  const setQuestions = useInterviewStore((state) => state.setQuestions);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setJobInfo(form);
-    console.log("Data saved to Store:", form);
-    // Next step: Call Backend API to generate questions
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const result = await startInterview(form); // This calls your Gemini backend
+    if (result.questions) {
+      setQuestions(result.questions); // Save AI questions to Zustand
+    }
+  } catch (error) {
+    console.error("Failed to start interview:", error);
+  }
+};
 
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
